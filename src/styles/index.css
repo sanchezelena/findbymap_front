@@ -23,14 +23,19 @@ html, body {
 }
 
 .search-bar {
-  width: 100%;
+  width: 70%;
   margin: 10px 0; 
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
+.search-bar h2 {
+  white-space: nowrap;
+  padding: 20px;
+}
 .search-bar input {
-  width: 100%;
+  width: 70%;
   padding: 8px; 
   border: 1px solid #ccc;
   border-radius: 5px;

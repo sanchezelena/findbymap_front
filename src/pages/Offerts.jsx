@@ -26,7 +26,7 @@ const Offert = () => {
     };
 
     return (
-        <div className="offert-page">
+        <div>
             <NavbarTop />
             <div className="main-content">
                 <NavbarSide />

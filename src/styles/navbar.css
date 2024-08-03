@@ -48,6 +48,7 @@ body {
 .navbar-title h1 {
   margin: 0;
   font-size: 24px;
+  color: white;
 }
 
 .navbar-title a {
@@ -62,3 +63,18 @@ body {
    margin-left: 0;
 }
   
+
+.subheader {
+   background-color: #a4a6aa;
+   width: 100%;
+   padding: 10px 0;
+   text-align: center;
+   position: relative;
+   top: 0; 
+}
+
+.subheader h2 {
+   margin: 0;
+   color: black;
+   font-weight: normal;
+}
