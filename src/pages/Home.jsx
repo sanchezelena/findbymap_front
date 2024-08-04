@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import NavbarSide from '../components/NavbarSide';
 import NavbarTop from '../components/NavbarTop';
-import SearchBar from '../components/SearchBar';
+import HomeSearchBar from '../components/HomeSearchBar';
 import ProductCard from '../components/ProductCard';
 import CategoryCard from '../components/CategoryCard';
 import aguaFontvella from '../assets/agua_fontvella.jpg';
@@ -35,9 +35,14 @@ const Home = () => {
         { id: 5, product_name: 'Leche Pascual', category: 'Lácteos', image: lechePascual, price: '1', units: 1, ubication: { aisle: '7', shelf: '8' } },
 
     ]);
+    const [filteredData, setFilteredData] = useState({
+        products: products,
+        categories: categories,
+        offers: offers,
+    });
 
-    const handleSearch = (event) => {
-        const query = event.target.value;
+    const handleSearchResults = (results) => {
+        setFilteredData(results);
     };
 
     return (
@@ -45,12 +50,17 @@ const Home = () => {
             <NavbarTop />
             <div className="main-content">
                 <NavbarSide />
-                <SearchBar onSearch={handleSearch} />
+                <HomeSearchBar 
+                    products={products} 
+                    categories={categories} 
+                    offers={offers} 
+                    onResults={handleSearchResults} 
+                />
                 <div className="content">
                     <div className="section offers">
                         <h2>Ofertas</h2>
                         <div className="card-container">
-                            {offers.map(offer => (
+                            {filteredData.offers && filteredData.offers.map(offer => (
                                 <ProductCard key={offer.id} product={offer} isOffer={true} />
                             ))}
                         </div>
@@ -58,7 +68,7 @@ const Home = () => {
                     <div className="section categories">
                         <h2>Categorías</h2>
                         <div className="card-container">
-                            {categories.map(category => (
+                            {filteredData.categories && filteredData.categories.map(category => (
                                 <CategoryCard key={category.id} category={category} />
                             ))}
                         </div>
@@ -66,7 +76,7 @@ const Home = () => {
                     <div className="section products">
                         <h2>Productos</h2>
                         <div className="card-container">
-                            {products.map(product => (
+                            {filteredData.products && filteredData.products.map(product => (
                                 <ProductCard key={product.id} product={product} isOffer={false} />
                             ))}
                         </div>

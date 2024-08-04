@@ -8,20 +8,17 @@ import lacteos from '../assets/lacteos.jpg';
 import '../styles/index.css';
 
 const Categories = () => {
-    const [categories, setCategories] = useState([
+    const [categories] = useState([
         { id: 1, category_name: 'Agua', image: agua },
         { id: 2, category_name: 'Lácteos', image: lacteos },
         { id: 3, category_name: 'Agua', image: agua },
         { id: 4, category_name: 'Lácteos', image: lacteos },
         { id: 5, category_name: 'Lácteos', image: lacteos },
     ]);
+    const [filteredCategories, setFilteredCategories] = useState(categories);
 
-    const handleSearch = (event) => {
-        const query = event.target.value.toLowerCase();
-        const filteredCategories = categories.filter(category =>
-            category.category_name.toLowerCase().includes(query)
-        );
-        setCategories(filteredCategories);
+    const handleSearch = (filtered) => {
+        setFilteredCategories(filtered);
     };
 
     return (
@@ -29,11 +26,11 @@ const Categories = () => {
             <NavbarTop />
             <div className="main-content">
                 <NavbarSide />
-                <SearchBar onSearch={handleSearch} />
+                <SearchBar data={categories} onResults={handleSearch} searchKey="category_name" />
                 <div className="content">
                     <h2>Categorías</h2>
                     <div className="card-container">
-                        {categories.map(category => (
+                        {filteredCategories.map(category => (
                             <CategoryCard key={category.id} category={category} />
                         ))}
                     </div>

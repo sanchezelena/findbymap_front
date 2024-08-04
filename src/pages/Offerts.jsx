@@ -20,9 +20,10 @@ const Offert = () => {
         { id: 9, product_name: 'Leche Pascual', category: 'Lácteos', image: lechePascual, price: '1', units: 1, ubication: { aisle: '7', shelf: '8' } },
         { id: 10, product_name: 'Leche Pascual', category: 'Lácteos', image: lechePascual, price: '1', units: 1, ubication: { aisle: '7', shelf: '8' } },
     ]);
+    const [filteredOffers, setFilteredOffers] = useState(offers);
 
-    const handleSearch = (event) => {
-        const query = event.target.value;
+    const handleSearch = (filtered) => {
+        setFilteredOffers(filtered);
     };
 
     return (
@@ -30,12 +31,12 @@ const Offert = () => {
             <NavbarTop />
             <div className="main-content">
                 <NavbarSide />
-                <SearchBar onSearch={handleSearch} />
+                <SearchBar data={offers} onResults={handleSearch} searchKey="product_name" />
                 <div className="content">
                     <div className="section offers">
                         <h2>Ofertas</h2>
                         <div className="card-container">
-                            {offers.map(offer => (
+                            {filteredOffers.map(offer => (
                                 <ProductCard key={offer.id} product={offer} isOffer={true} />
                             ))}
                         </div>
